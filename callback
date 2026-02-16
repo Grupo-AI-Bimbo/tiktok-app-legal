@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Logging you in...</h2>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get("code");
+
+fetch("https://your-backend.com/exchange-token", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ code })
+})
+.then(res => res.json())
+.then(data => {
+  document.body.innerHTML = `
+    <h3>Login Successful</h3>
+    <p>Username: ${data.username}</p>
+    <img src="${data.avatar}" width="100"/>
+  `;
+});
+</script>
+
+</body>
+</html>
